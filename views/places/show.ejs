@@ -51,7 +51,7 @@
       <p class="mb-1 fs-4 text-light">Website: <%= result.website %></p>
       
       
-      <%# This is where we'll list the profiles who have cadded the result %>
+      <%# This is where we'll list the profiles who have added the result %>
       <div class="accordion" id="accordion">
         <div class="accordion-item bg-dark">
           <h2 class="accordion-header" id="headingTwo">
@@ -96,7 +96,7 @@
     <% if (!userAddedPlace) { %>
       <form 
         class="text-center" 
-        action="/results/<%= result.place_id %>/addToCollection?_method=PATCH" 
+        action="/places/<%= result.place_id %>/addToCollection?_method=PATCH" 
         method="POST"
       >
         <input type="text" name="name" hidden value="<%= result.name %>">
@@ -121,7 +121,7 @@
     <% if (userAddedPlace) { %>
       <form 
         class="text-center" 
-        action="/results/<%= result.id %>/removeFromCollection?_method=PATCH" 
+        action="/places/<%= result.place_id %>/removeFromCollection?_method=PATCH" 
         method="POST"
       >
         <button class="btn btn-danger">

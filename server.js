@@ -23,6 +23,7 @@ import('./config/passport.js')
 import { router as indexRouter } from './routes/index.js'
 import { router as authRouter } from './routes/auth.js'
 import { router as placesRouter } from './routes/places.js'
+import { router as collectionsRouter } from './routes/collections.js'
 
 // view engine setup
 app.set(
@@ -62,6 +63,7 @@ app.use(passport.session())
 // router middleware
 app.use('/', indexRouter)
 app.use('/places', placesRouter)
+app.use('/collections', collectionsRouter )
 app.use('/auth', authRouter)
 
 // catch 404 and forward to error handler

@@ -8,6 +8,8 @@ router.get('/', isLoggedIn, placesCtrl.toBoroughs)
 router.get('/:id', isLoggedIn, placesCtrl.show)
 router.post('/activities', isLoggedIn, placesCtrl.toActivities)
 router.post('/list', isLoggedIn, placesCtrl.list)
+router.patch('/:id/addToCollection', isLoggedIn, placesCtrl.addToCollection)
+router.delete('/:id/removeFromCollection', isLoggedIn, placesCtrl.removeFromCollection )
 
 
 function isLoggedIn(req, res, next) {

@@ -42,7 +42,7 @@ function list(req,res){
         
         
         res.render('places/list', {
-            title: 'Place List',
+            title: 'place List',
             user: req.user ? req.user : null,
             results: response.data.results
         })
@@ -56,7 +56,7 @@ function show(req,res){
     console.log(req.params.id)
     axios.get(`https://maps.googleapis.com/maps/api/place/details/json?place_id=${req.params.id}&key=${process.env.API_KEY}`)
     .then(response =>{
-        console.log(response.data.result.website)
+        
         Place.findOne({ placesId: response.data.place_id})
         .populate('addedBy')
         .then(place =>{
@@ -64,7 +64,7 @@ function show(req,res){
                 title: 'Details',
                 result: response.data.result,
                 place,
-                userAddedPlace: place?.addedBy.some(place => place._id.equals()),
+                userAddedPlace: place?.addedBy.some(profile => profile._id.equals(req.user.profile._id)),
                 user: req.user ? req.user : null
 
             })
@@ -72,7 +72,53 @@ function show(req,res){
     })
 }
 
-        
+function addToCollection(req, res) {
+    // Check to see if place is already in our database
+    Place.findOne({ placesId: req.params.id })
+    .then(place => {
+      if (place) { // <<-- If it is in the database
+        // Push the user's profile id into the collectedBy array
+        place.addedBy.push(req.user.profile._id)
+        // Save the document
+        place.save()
+        .then(()=> {
+          // Redirect back to the place's show view
+          res.redirect(`/places/list`)
+        })
+      } else {  // <<-- If it is NOT in the database
+          // Create a new place using the model
+          req.body.addedBy = req.user.profile._id
+          Place.create(req.body)
+          .then(()=> {
+            // Redirect back to the place's show view
+            res.redirect(`/places/list`)
+          })
+      }
+    })
+    .catch(err => {
+      console.log(err)
+      res.redirect('/')
+    })
+  }
+
+  function removeFromCollection(req, res) {
+    // Find the game in the database
+    Place.findOne({ rawgId: req.params.id })
+    .then(place => {
+      // Remove the user's profile id from the collectedBy
+      place.collectedBy.remove({ _id: req.user.profile._id })
+      // Save the document
+      place.save()
+      .then(()=> {
+        // Redirect back to the game's show view
+        res.redirect(`/places/list`)
+      })
+    })
+    .catch(err => {
+      console.log(err)
+      res.redirect('/')
+    })
+  }    
         
         
 
@@ -81,5 +127,7 @@ export {
     toBoroughs,
     toActivities,
     list,
-    show
+    show,
+    addToCollection,
+    removeFromCollection
 }
