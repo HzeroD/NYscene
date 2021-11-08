@@ -5,17 +5,17 @@
 <h1><%= borough.toString() %></h1>
     <br>
     <br>
-  <form action="/places/<%=results.place_id %>/list" method="POST">
+  <form action="/places/list" method="POST">
     <input type="submit" name="<%=borough%> " value="museum">
   </form>  
   <br>
 
-  <form action="/places/<%=results.place_id %>/list" method="POST">
+  <form action="/places/list" method="POST">
     <input type="submit" name="<%=borough%>" value="restaurant">
   </form>
   <br>
 
-  <form action="/places/<%=results.place_id %>/list" method="POST">
+  <form action="/places/list" method="POST">
     <input type="submit" name="<%=borough%>" value="bar">
   </form>
   <br>

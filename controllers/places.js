@@ -53,22 +53,29 @@ function list(req,res){
 }
 
 function show(req,res){
+    console.log(req.params.id)
     axios.get(`https://maps.googleapis.com/maps/api/place/details/json?place_id=${req.params.id}&key=${process.env.API_KEY}`)
-    .then(results =>{
-        Place.findOne({ placesId: req.params.id})
+    .then(response =>{
+        console.log(response.data.result.website)
+        Place.findOne({ placesId: response.data.place_id})
         .populate('addedBy')
         .then(place =>{
             res.render('places/show', {
                 title: 'Details',
-                result: response.data.results,
+                result: response.data.result,
                 place,
-                userAddedPlace: place?.addedBy.some(place => place._id.equals())
+                userAddedPlace: place?.addedBy.some(place => place._id.equals()),
+                user: req.user ? req.user : null
+
             })
         })
-        
-        
-        )
+    })
 }
+
+        
+        
+        
+
 
 export {
     toBoroughs,

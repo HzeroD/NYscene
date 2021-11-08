@@ -5,9 +5,10 @@ const router = Router()
 
 
 router.get('/', isLoggedIn, placesCtrl.toBoroughs)
+router.get('/:id', isLoggedIn, placesCtrl.show)
 router.post('/activities', isLoggedIn, placesCtrl.toActivities)
-router.post('/:id', isLoggedIn, placesCtrl.list)
-router.post('/:id', isLoggedIn, placesCtrl.show)
+router.post('/list', isLoggedIn, placesCtrl.list)
+
 
 function isLoggedIn(req, res, next) {
     if (req.isAuthenticated()) return next();
