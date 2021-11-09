@@ -1,0 +1,143 @@
+<%- include('../partials/html-head') %>
+<%- include('../partials/nav') %>
+
+
+<main>
+  <section class="bg-dark text-secondary px-4">
+    <h1 class="display-5 fw-bold text-white pt-2 text-center">
+      <%= result.name %>
+    </h1>
+    <div class="container py-4">
+      <img 
+        width="100%" 
+        src="<%= result.icon %>" 
+        alt="<%= result.name %>'s background image"
+      >
+      <div class="accordion" id="accordion">
+        <div class="accordion-item bg-dark">
+          <h2 class="accordion-header" id="headingOne">
+            <button 
+              class="accordion-button bg-dark text-light" 
+              type="button" 
+              data-bs-toggle="collapse" 
+              data-bs-target="#collapseOne" 
+              aria-expanded="true" 
+              aria-controls="collapseOne"
+            >
+              Location Description
+            </button>
+          </h2>
+          <div 
+            id="collapseOne" 
+            class="accordion-collapse collapse" 
+            aria-labelledby="headingOne" 
+            data-bs-parent="#accordion"
+          >
+            <!-- <div class="accordion-body">
+              <p class="mt-4"><%= result.description_raw %></p>
+            </div> -->
+          </div>
+        </div>
+      </div>
+      <p class="mt-4 fs-4 text-light">Address: <%= result.formatted_address %></p>
+      <p class="mt-4 fs-4 text-light">
+        ESRB Rating: 
+        <%= result.esrb_rating ? result.esrb_rating.name : 'N/A' %>
+      </p>
+      <p class="mb-1 fs-4 text-light">Rating: <%= result.rating %></p>
+   
+      <p class="mb-1 fs-4 text-light">Total Ratings: <%= result.user_ratins_total %></p>
+      
+      <p class="mb-1 fs-4 text-light">Website: <%= result.website %></p>
+      
+      
+      <%# This is where we'll list the profiles who have added the result %>
+      <div class="accordion" id="accordion">
+        <div class="accordion-item bg-dark">
+          <h2 class="accordion-header" id="headingTwo">
+            <button 
+              class="accordion-button bg-dark text-light" 
+              type="button" 
+              data-bs-toggle="collapse" 
+              data-bs-target="#collapseTwo" 
+              aria-expanded="true" 
+              aria-controls="collapseTwo"
+            >
+              This result appears in <%= place?.addedBy.length %> NYscene user collections:
+            </button>
+          </h2>
+          <div 
+            id="collapseTwo" 
+            class="accordion-collapse collapse" 
+            aria-labelledby="headingTwo" 
+            data-bs-parent="#accordion"
+          >
+            <div class="accordion-body">
+              <% place?.addedBy.forEach(profile => { %>
+                <a href="/collections/<%= profile._id %>" class="text-white">
+                  <p>
+                    <img 
+                      src="<%= profile.avatar %>" 
+                      alt="<%= profile.name %>'s avatar"
+                      class="me-3 rounded-circle"
+                      width="50px"
+                      height="50px"
+                    >
+                    <%= profile.name %>
+                  </p>
+                </a>
+              <% }) %>
+            </div>
+          </div>
+        </div>
+      </div> 
+    </div>
+    <%# This is where we'll display a button to add/remove the result from your collection %> 
+    <% if (!userAddedPlace) { %>
+      <form 
+        class="text-center" 
+        action="/places/<%= result.place_id %>/addToCollection?_method=PATCH" 
+        method="POST"
+      >
+        <input type="text" name="name" hidden value="<%= result.name %>">
+        <input type="text" name="rawgId" hidden value="<%= result.place_id %>">
+        <input 
+          type="text" 
+          name="imageUrl" 
+          hidden 
+          value="<%= result.icon %>"
+        >
+        <input 
+          type="text" 
+          name="released" 
+          hidden 
+          value="<%= result.released %>"
+        >
+        <button class="btn btn-primary">
+          Add To Collection
+        </button> 
+      </form>
+    <% } %>
+    <% if (userAddedPlace) { %>
+      <form 
+        class="text-center" 
+        action="/places/<%= result.place_id %>/removeFromCollection?_method=PATCH" 
+        method="POST"
+      >
+        <button class="btn btn-danger">
+          Remove From Collection
+        </button>
+      </form>
+    <% } %> 
+
+    
+    <div class="container">
+      <%# This is where we'll display a form to add a review once the result is added to your collection %> 
+      
+      <%# This is where we'll display all the reviews for a result %> 
+      
+    </div>
+  </section>
+</main>
+
+<%- include('../partials/footer') %>

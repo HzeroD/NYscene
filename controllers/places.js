@@ -64,7 +64,7 @@ function show(req,res){
                 title: 'Details',
                 result: response.data.result,
                 place,
-                userAddedPlace: place?.addedBy.some(profile => profile._id.equals(req.user.profile._id)),
+                userAddedPlace: false,
                 user: req.user ? req.user : null
 
             })
@@ -77,13 +77,13 @@ function addToCollection(req, res) {
     Place.findOne({ placesId: req.params.id })
     .then(place => {
       if (place) { // <<-- If it is in the database
-        // Push the user's profile id into the collectedBy array
+        // Push the user's profile id into the addedBy array
         place.addedBy.push(req.user.profile._id)
         // Save the document
         place.save()
         .then(()=> {
           // Redirect back to the place's show view
-          res.redirect(`/places/list`)
+          res.redirect('places/list')
         })
       } else {  // <<-- If it is NOT in the database
           // Create a new place using the model
@@ -91,7 +91,7 @@ function addToCollection(req, res) {
           Place.create(req.body)
           .then(()=> {
             // Redirect back to the place's show view
-            res.redirect(`/places/list`)
+            res.redirect('places/list')
           })
       }
     })
@@ -111,7 +111,7 @@ function addToCollection(req, res) {
       place.save()
       .then(()=> {
         // Redirect back to the game's show view
-        res.redirect(`/places/list`)
+        res.redirect('places/list')
       })
     })
     .catch(err => {

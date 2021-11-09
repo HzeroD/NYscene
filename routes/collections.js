@@ -3,6 +3,7 @@ import * as collectionsCtrl from '../controllers/collections.js'
 const router = Router()
 
 router.get('/', isLoggedIn, collectionsCtrl.index)
+router.get('/:id', isLoggedIn, collectionsCtrl.show)
 
 
 

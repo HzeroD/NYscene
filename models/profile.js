@@ -8,7 +8,8 @@ const profileSchema = new mongoose.Schema({
   bio: String,
   reviews: [{type: Schema.Types.ObjectId, ref: 'Review'}],
   friends: [{type: Schema.Types.ObjectId, ref: 'Profile'}],
-  posts: [{type: Schema.Types.ObjectId, ref: 'Post'}]
+  posts: [{type: Schema.Types.ObjectId, ref: 'Post'}],
+  places: [{type: Schema.Types.ObjectId, ref: 'Place'}],
 }, {
   timestamps: true
 })
