@@ -35,7 +35,48 @@ function show(req, res) {
     })
   }
 
+  function addFriend(req, res) {
+    // Look up the logged in user's profile
+    Profile.findById(req.user.profile)
+    .then(profile => {
+      // Push the ObjectId of the friend being added (req.params.id) into friends array
+      profile.friends.push(req.params.id)
+      // Save the instance of the document
+      profile.save()
+      .then(()=> {
+        // Redirect back to the profile's show view
+        res.redirect(`/profiles/${req.params.id}`)
+      })
+    })
+    .catch(err => {
+      console.log(err)
+      res.redirect('/')
+    })
+  }
+
+
+  function removeFriend(req, res) {
+    // Look up the logged in user's profile
+    Profile.findById(req.user.profile)
+    .then(profile => {
+      // Remove the ObjectId of the friend being removed (req.params.id) from friends array
+      profile.friends.remove({_id: req.params.id})
+      // Save the instance of the document
+      profile.save()
+      .then(()=> {
+        // Redirect back to the profile's show view
+        res.redirect(`/profiles/${req.params.id}`)
+      })
+    })
+    .catch(err => {
+      console.log(err)
+      res.redirect('/')
+    })
+  }
+
 export{
     index,
-    show
+    show,
+    addFriend,
+    removeFriend
 }

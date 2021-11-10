@@ -17,7 +17,7 @@ function toActivities(req, res){
     //AXIOS is necessary here if we want to preview the kinds of activities the payload borough has
     axios.get(`https://maps.googleapis.com/maps/api/place/textsearch/json?query=${req.body.borough}&key=${process.env.API_KEY}`)
     .then(response => {
-        console.log(response)
+       
         res.render('places/activities', {
             title: 'Outings',
             borough: req.body.borough,
@@ -36,9 +36,7 @@ function list(req,res){
     const place = Object.values(req.body)[0]
     axios.get(`https://maps.googleapis.com/maps/api/place/textsearch/json?query=${name}&type=${place}&key=${process.env.API_KEY}`)
     .then(response => {
-        console.log(req.body)
-        console.log(name)
-        console.log(place)
+       
         
         
         res.render('places/list', {
@@ -56,15 +54,17 @@ function show(req,res){
     console.log(req.params.id)
     axios.get(`https://maps.googleapis.com/maps/api/place/details/json?place_id=${req.params.id}&key=${process.env.API_KEY}`)
     .then(response =>{
-        
-        Place.findOne({ placesId: response.data.place_id})
+      console.log(req.params.id)
+      
+        Place.findOne({placesId: req.params.id})
         .populate('addedBy')
         .then(place =>{
+          console.log(place)
             res.render('places/show', {
                 title: 'Details',
                 result: response.data.result,
                 place,
-                userAddedPlace: false,
+                userAddedPlace: place?.addedBy.some(profile => profile._id.equals(req.user.profile._id)),
                 user: req.user ? req.user : null
 
             })
@@ -74,7 +74,7 @@ function show(req,res){
 
 function addToCollection(req, res) {
     // Check to see if place is already in our database
-    Place.findOne({ placesId: req.params.id })
+    Place.findOne({placesId: req.params.id})
     .then(place => {
       if (place) { // <<-- If it is in the database
         // Push the user's profile id into the addedBy array
@@ -83,7 +83,7 @@ function addToCollection(req, res) {
         place.save()
         .then(()=> {
           // Redirect back to the place's show view
-          res.redirect('places/list')
+          res.redirect(`/places/${req.params.id}`)
         })
       } else {  // <<-- If it is NOT in the database
           // Create a new place using the model
@@ -91,7 +91,7 @@ function addToCollection(req, res) {
           Place.create(req.body)
           .then(()=> {
             // Redirect back to the place's show view
-            res.redirect('places/list')
+            res.redirect(`/places/${req.params.id}`)
           })
       }
     })
@@ -102,16 +102,16 @@ function addToCollection(req, res) {
   }
 
   function removeFromCollection(req, res) {
-    // Find the game in the database
-    Place.findOne({ rawgId: req.params.id })
+    // Find the place in the database
+    Place.findOne({ placesId: req.params.id })
     .then(place => {
-      // Remove the user's profile id from the collectedBy
-      place.collectedBy.remove({ _id: req.user.profile._id })
+      // Remove the user's profile id from the addedBy
+      place.addedBy.remove({ _id: req.user.profile._id })
       // Save the document
       place.save()
       .then(()=> {
-        // Redirect back to the game's show view
-        res.redirect('places/list')
+        // Redirect back to the place's show view
+        res.redirect(`/profiles/${req.params.id}`)
       })
     })
     .catch(err => {

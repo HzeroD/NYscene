@@ -12,7 +12,8 @@ const postSchema = new Schema({
     content: String,
     author: {type: Schema.Types.ObjectId, ref: 'Profile'},
     replies: [replySchema]
-})
+},
+{timestamps: true})
 
 const Post = mongoose.model('Post', postSchema)
 
