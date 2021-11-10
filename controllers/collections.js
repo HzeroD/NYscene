@@ -32,13 +32,15 @@ function index(req,res){
                     title: 'Details',
                     result: response.data,
                     place,
-                    userAddedPlace: place.addedBy.some(profile => profile._id.equals(req.user.profile._id)),
+                    userAddedPlace: true,
                     user: req.user ? req.user : null
     
                 })
             })
         })
     }
+
+
 
 export{
     index,

@@ -87,6 +87,7 @@ function addToCollection(req, res) {
         })
       } else {  // <<-- If it is NOT in the database
           // Create a new place using the model
+          req.body.placesId = req.params.id
           req.body.addedBy = req.user.profile._id
           Place.create(req.body)
           .then(()=> {
@@ -111,7 +112,7 @@ function addToCollection(req, res) {
       place.save()
       .then(()=> {
         // Redirect back to the place's show view
-        res.redirect(`/profiles/${req.params.id}`)
+        res.redirect(`/places/${req.params.id}`)
       })
     })
     .catch(err => {
