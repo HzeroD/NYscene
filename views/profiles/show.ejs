@@ -1,4 +1,5 @@
 <%- include('../partials/html-head') %>
+<%- include('../partials/nav') %>
 <% if (user.profile.equals(profile._id)) { %>
   <style>
     #profile-dropdown {
@@ -6,7 +7,7 @@
     }
   </style>
 <% } %>
-<%- include('../partials/nav') %>
+
 
 <main>
   <section class="bg-dark text-secondary px-4 py-5 text-center">
@@ -123,7 +124,39 @@
       </div>
       <h2 class="mb-3"><%= profile.name %>'s places</h2>
       <div class="row row-cols-1 row-cols-md-2 row-cols-xl-3 g5 px-1">
-        <%# This is where we'll loop over our places! %> 
+        <% places.forEach(place => { %>
+            <div class="col">
+              <div class="card bg-dark shadow-sm mb-3">
+                <% if (place.imageUrl) { %>
+                  <img
+                    class="card-img-top"
+                    src="<%= game.imageUrl %>"
+                    alt="<%= game.name %>'s image"
+                    width="100%"
+                  />
+                <% } else {%>
+                  <img
+                    class="card-img-top"
+                    src="/images/icons/user.png"
+                    alt="A placeholder avatar"
+                    width="100%"
+                  />
+                <% } %>
+                <div class="card-body">
+                  <p class="card-title fs-4 text-light"><%= game.name %></p>
+                  <p class="card-text fs-5 text-light">
+                    Released: <%= game?.released.toLocaleDateString() %>
+                  </p>
+                  <a 
+                    href="/games/<%= game.rawgId %>" 
+                    class="btn btn-primary"
+                  >
+                    Details
+                  </a>
+                </div>
+              </div>
+            </div>
+          <% }) %> 
       </div>
     </div>
   </section>

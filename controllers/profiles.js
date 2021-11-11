@@ -7,7 +7,8 @@ function index(req,res){
         console.log(profiles)
     res.render('profiles/index', {
         title: 'User Profiles',
-        profiles
+        profiles,
+        user: req.user ? req.user : null
 
     })
 })

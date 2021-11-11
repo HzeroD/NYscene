@@ -2,13 +2,19 @@
 <%- include('./partials/nav') %>
 
 <main>
-  <h1>hello, <%= user ? user.profile.name : "friend" %></h1>
+  <h1>Hey <%= user ? user.profile.name : "there!" %></h1>
   <% if (user?.profile.avatar) { %>
-    <div>
+    <div style="text-align: center;">
       <img 
         src="<%= user.profile.avatar %>" 
         alt="<%= user.profile.name %> avatar"
       >
+      <h3>Welcome to NYscene! A hub for collecting places you'd like to visit
+        or have already and share your opinions with the community. 
+      </h3>
+    </div>
+    <div style="text-align: center;">
+      <img src="https://i.imgur.com/Goyxkcs.jpg" width="400" height="400">
     </div>
   <% } %>
 </main>

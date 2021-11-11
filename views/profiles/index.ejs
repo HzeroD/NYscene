@@ -1,5 +1,7 @@
+<%- include('../partials/html-head') %>
+<%- include('../partials/nav') %>
 <main class="bg-light">
-    <div class="container py-5 px-3">
+    <div style="background-color: #d6d4cd;" class="container py-5 px-3">
       <div 
         class="row row-cols-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5 g5 g-sm-3 g-xxl-5 px-sm-5 px-4"
       >
@@ -12,9 +14,10 @@
                     class="card-img-top"
                     src="<%= profile.avatar %>"
                     alt="<%= profile.name %>'s avatar"
-                    width="100%"
+                    width="10%"
                     height="170"
                   />
+                  
                 <% } else {%>
                   <img
                     class="card-img-top"

@@ -2,6 +2,7 @@ import axios from 'axios'
 import { response } from 'express'
 import { Place } from '../models/place.js'
 import { Profile } from '../models/profile.js'
+import { Review } from '../models/review.js'
 
 function toBoroughs(req, res){
     res.render('places/boroughs', {
@@ -58,6 +59,12 @@ function show(req,res){
       
         Place.findOne({placesId: req.params.id})
         .populate('addedBy')
+        .populate({
+          path: 'reviews',
+          populate: {
+            path: 'author'
+          }
+        })
         .then(place =>{
           console.log(place)
             res.render('places/show', {
@@ -65,6 +72,7 @@ function show(req,res){
                 result: response.data.result,
                 place,
                 userAddedPlace: place?.addedBy.some(profile => profile._id.equals(req.user.profile._id)),
+                userHasReviewed: place?.reviews.some(review => review.author.equals(req.user.profile._id)),
                 user: req.user ? req.user : null
 
             })
