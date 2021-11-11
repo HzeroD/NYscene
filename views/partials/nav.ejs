@@ -6,19 +6,19 @@
   <nav>
     <% if (user) { %>
       <a href="/auth/logout">
-        <button type="submit">Logout</button>
+        <button type="submit" class="btn btn-danger">Logout</button>
       </a>
       <a href="/places">
-        <button type="submit">Add Places</button>
+        <button type="submit" class="btn btn-primary">Add Places</button>
       </a>
       <a href="/collections">
-        <button type="submit">My Places</button>
+        <button type="submit" class="btn btn-primary">My Places</button>
       </a>
       <a href="/profiles">
-        <button type="submit">Profiles</button>
+        <button type="submit" class="btn btn-primary">Profiles</button>
       </a>
       <a href="/posts">
-        <button type="submit">Post Board</button>
+        <button type="submit" class="btn btn-primary">Post Board</button>
       </a>
     <% } else { %>
       <a href="/auth/google" class="siwg-link">

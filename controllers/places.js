@@ -36,9 +36,9 @@ function list(req,res){
     const place = Object.values(req.body)[0]
     axios.get(`https://maps.googleapis.com/maps/api/place/textsearch/json?query=${name}&type=${place}&key=${process.env.API_KEY}`)
     .then(response => {
-       
-        
-        
+        console.log(response.data.results[0])
+        console.log("-----------------")
+        console.log(response.data.results[0].photos[0])
         res.render('places/list', {
             title: 'place List',
             user: req.user ? req.user : null,
