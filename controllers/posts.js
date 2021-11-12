@@ -53,7 +53,10 @@ function index(req, res) {
   }
 
   function deletePost(req, res){
-      Post.findByIdAndDelete(req.params.id, function(err,post){
+      Post.findById(req.params.id, function(err,post){
+        if(post.author.equals(req.user.profile.id)){
+          post.delete()
+        }
       res.redirect('/posts')
       })
   }

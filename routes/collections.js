@@ -4,6 +4,9 @@ const router = Router()
 
 router.get('/', isLoggedIn, collectionsCtrl.index)
 router.get('/:id', isLoggedIn, collectionsCtrl.show)
+router.patch('/:id/addToCollection', isLoggedIn, collectionsCtrl.addToCollection)
+router.patch('/:id/removeFromCollection', isLoggedIn, collectionsCtrl.removeFromCollection)
+
 
 
 

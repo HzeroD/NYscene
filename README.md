@@ -26,7 +26,7 @@ As a NYC native I've received guests over the years who want to enjoy the city a
 The Begin Adventure button will take the player to the introductory story. Clicking Start Game will start the game. 
 It is simple: Read the story shown and click on which path you would take as the protagonist. An example is shown below:
 
-![image](/images/From_Above.png)
+![image](/images/NYsceneERD.drawio.png)
 <br>
 
 

@@ -16,7 +16,7 @@
                   
                     <img
                       class="card-img-top"
-                      src="https://maps.googleapis.com/maps/api/place/photo?photo_reference=<%=place.imageURL%>&maxwidth=4032&maxheight=3024&key=<%=process.env.API_KEY%>"
+                      src="https://maps.googleapis.com/maps/api/place/photo?photo_reference=<%=result.photos[0].photo_reference%>&maxwidth=4032&maxheight=3024&key=<%=process.env.API_KEY%>"
                       atl="Generic Museum Image"
                       width="100%"
                       height="170"
@@ -29,7 +29,7 @@
                     
                     
                     <%# This is where our places show UI will go %> 
-                    <a href="/collections/<%= place._id %>" class="btn btn-primary">Details</a>
+                    <a href="/collections/<%= place.placesId %>" class="btn btn-primary">Details</a>
                   </div>
                 </div>
               </div>

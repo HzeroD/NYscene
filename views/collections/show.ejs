@@ -40,10 +40,7 @@
         </div>
       </div>
       <p class="mt-4 fs-4 text-light">Address: <%= result.formatted_address %></p>
-      <p class="mt-4 fs-4 text-light">
-        ESRB Rating: 
-        <%= result.esrb_rating ? result.esrb_rating.name : 'N/A' %>
-      </p>
+      
       <p class="mb-1 fs-4 text-light">Rating: <%= result.rating %></p>
    
       <p class="mb-1 fs-4 text-light">Total Ratings: <%= result.user_ratins_total %></p>
@@ -121,7 +118,7 @@
     <% if (userAddedPlace) { %>
       <form 
         class="text-center" 
-        action="/places/<%= result.place_id %>/removeFromCollection?_method=PATCH" 
+        action="/collections/<%= result.place_id %>/removeFromCollection?_method=PATCH" 
         method="POST"
       >
         <button class="btn btn-danger">
