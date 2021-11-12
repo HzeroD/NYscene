@@ -20,7 +20,8 @@ function show(req, res) {
     Profile.findById(req.params.id)
     .populate('friends')
     .then(profile => {
-      Place.findById(req.params.id)
+      Place.find({addedBy: req.params.id})
+      .then(places => {
       // Find the profile for the current logged in user (to check friend list)
       Profile.findById(req.user.profile)
       .then(userProfile => {
@@ -29,11 +30,13 @@ function show(req, res) {
         res.render('profiles/show', {
           title: `${profile.name}'s Profile`,
           profile,
+          places,
           userProfile,
           user: req.user ? req.user : null
         })
       })
     })
+  })
     .catch(err => {
       console.log(err)
       res.redirect('/')

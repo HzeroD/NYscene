@@ -52,14 +52,7 @@
       </table>
     </div>
     <% if (user.profile.equals(profile._id)) { %>
-      <%# This is where we'll add the UI to edit a profile %> 
-      <a 
-        class="btn btn-warning"
-        role="button" 
-        href="/profiles/<%= profile._id %>/edit"
-      >
-        Edit Profile
-      </a>
+      
       <a 
         class="btn btn-danger ms-4"
         role="button" 
@@ -101,7 +94,8 @@
                     class="card-img-top"
                     src="<%= friend.avatar %>"
                     alt="<%= friend.name %>'s avatar"
-                    width="100%"
+                    width="20%"
+                    height="20%"
                   />
                 <% } else {%>
                   <img
@@ -130,8 +124,8 @@
                 <% if (place.imageUrl) { %>
                   <img
                     class="card-img-top"
-                    src="<%= game.imageUrl %>"
-                    alt="<%= game.name %>'s image"
+                    src="<%= place.imageUrl %>"
+                    alt="<%= place.name %>'s image"
                     width="100%"
                   />
                 <% } else {%>
@@ -143,15 +137,12 @@
                   />
                 <% } %>
                 <div class="card-body">
-                  <p class="card-title fs-4 text-light"><%= game.name %></p>
+                  <p class="card-title fs-4 text-light"><%= place.name %></p>
                   <p class="card-text fs-5 text-light">
-                    Released: <%= game?.released.toLocaleDateString() %>
+                    
                   </p>
-                  <a 
-                    href="/games/<%= game.rawgId %>" 
-                    class="btn btn-primary"
-                  >
-                    Details
+                  
+                    
                   </a>
                 </div>
               </div>

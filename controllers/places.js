@@ -66,7 +66,7 @@ function show(req,res){
           }
         })
         .then(place =>{
-          place.imageURL = response.data.result.photos[0].photo_reference
+          
             res.render('places/show', {
                 title: 'Details',
                 result: response.data.result,
