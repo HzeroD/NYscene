@@ -5,8 +5,16 @@ import { Place } from '../models/place.js'
 function index(req,res){
         Place.find({addedBy: req.user.profile._id})
         .then(places =>{
+            let references = []
+            for(let i = 0; i < places.length; i++){
+                axios.get(`https://maps.googleapis.com/maps/api/place/textsearch/json?query=${places[i].name}&key=${process.env.API_KEY}`)
+                .then(response => {
+                    references = response.data.results[0].photos[0].photo_reference
+                }
+                )}
             
-            console.log(places)
+            console.log("-----------------------")
+            console.log(references[0])
             res.render('collections', {
                 title: 'My Places',
                 places,
