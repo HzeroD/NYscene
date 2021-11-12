@@ -1,72 +1,48 @@
-# MEN Stack with OAuth Template
+# SEI--10/04--MEN Stack Web Application
+## NYscene
 
-This is a MEN Stack template that includes OAuth.
 
-Use this to go build things! 🚀
+---
 
-## To Use This Template
+<br>
+<br>
+<br>
 
-__Replace `<name-of-your-app-here>` in the commands below with the name of your app!__
+### Introduction
+NYscene is a web application built for the purposes of collecting places(museums, bars, restaurants) to your collections with the intention of visiting said place.
 
-```bash
-git clone https://github.com/SEI-Remote-WC/men-stack-oauth-template.git <name-of-your-app-here>
-cd <name-of-your-app-here>
-```
 
-Once you are in the project directory:
+### Motivations
 
-```bash
-rm -rf .git
-```
+As a NYC native I've received guests over the years who want to enjoy the city and know what are the best spots. I figured an application with serves this need would help both visitors and residents alike
 
-Here's what your command line output should like after this step (note that the indicator that we are in a git repository is gone!)
+<br>
 
-<img src="https://i.imgur.com/L47kNOZ.png" alt="The command line before and after running the rm -rf .git command. Before git:(main) is visible indiating that the directory contains a git repository, after the command it is not.">
+### Game Link and Guide
 
-Re-initialize a git repository:
+[From Above](https://fromabove.surge.sh/)
 
-```bash
-git init
-```
 
-Use the GitHub CLI to create a new project repository on GitHub:
+The Begin Adventure button will take the player to the introductory story. Clicking Start Game will start the game. 
+It is simple: Read the story shown and click on which path you would take as the protagonist. An example is shown below:
 
-```bash
-gh repo create <name-of-your-app-here>
-```
+![image](/images/From_Above.png)
+<br>
 
-Run npm i to fetch the template's dependencies:
 
-```bash
-npm i
-```
 
-Then, make an initial commit:
+### Technologies Used
 
-```bash
-git add .
-git commit -m "initial commit"
-git push -u origin main
-```
+Languages: Javascript, HTML, CSS, ESJ
+Frameworks/Libraries: Node.JS, Express, Mongoose, Bootstrap
+Database: MongoDB
+API: Google Places API
 
-touch a .env file:
 
-```bash
-touch .env
-```
+### Next Steps
 
-Fill it with the following:
+To improve the app's presentation.
 
-```
-DATABASE_URL=XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-GOOGLE_CALLBACK=http://localhost:3000/auth/google/oauth2callback
-GOOGLE_CLIENT_ID=XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-GOOGLE_SECRET=XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-SESSION_SECRET=XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-```
 
-Replace the `DATABASE_URL`, `GOOGLE_CLIENT_ID`, `GOOGLE_SECRET`, and `SESSION_SECRET` with values that you provide.
 
-Delete this README.md
 
-You're done!
