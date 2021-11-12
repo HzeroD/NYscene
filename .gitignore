@@ -3,12 +3,13 @@ bin-debug/
 bin-release/
 [Oo]bj/
 [Bb]in/
+.env
 
 # Other files and folders
 .settings/
 
 # Executables
-.env
+
 *.swf
 *.air
 *.ipa
