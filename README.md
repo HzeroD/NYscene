@@ -28,7 +28,7 @@ It is simple: Read the story shown and click on which path you would take as the
 
 ![image](/images/NYsceneERD.drawio.png)
 ![image](/images/NYscene_list_view.png)
-![image](images/NYscene_places_view.png)
+![image](images/NYscene_places_view.jpeg)
 <br>
 
 
