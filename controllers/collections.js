@@ -3,6 +3,7 @@ import { response } from 'express'
 import { Place } from '../models/place.js'
 
 function index(req,res){
+    
         Place.find({addedBy: req.user.profile._id})
         .then(places =>{
             const references = []
@@ -12,9 +13,10 @@ function index(req,res){
                 .then(response => {
                     
                     references.push(response.data.results[0].photos[0].photo_reference)
-                    console.log(references)
+                    
                 }
                 )}
+                console.log(places)
             
             console.log("-----------------------")
             console.log(references[0])
@@ -40,10 +42,10 @@ function index(req,res){
             .populate('addedBy')
             .then(place =>{
                 console.log("***************")
-              console.log(response.data.results[0])
+              
                 res.render('collections/show', {
                     title: 'Details',
-                    result: response.data.results,
+                    result: response.data.result,
                     place,
                     userAddedPlace: place?.addedBy.some(profile => profile._id.equals(req.user.profile._id)),
                     user: req.user ? req.user : null

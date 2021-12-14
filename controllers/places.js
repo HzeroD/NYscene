@@ -59,6 +59,7 @@ function show(req,res){
       
         Place.findOne({placesId: req.params.id})
         .populate('addedBy')
+        .populate('imageURL')
         .populate({
           path: 'reviews',
           populate: {
@@ -66,6 +67,8 @@ function show(req,res){
           }
         })
         .then(place =>{
+          console.log(place)
+          
           
             res.render('places/show', {
                 title: 'Details',
@@ -88,6 +91,7 @@ function addToCollection(req, res) {
         // Push the user's profile id into the addedBy array
         place.addedBy.push(req.user.profile._id)
         // Save the document
+        
         place.save()
         .then(()=> {
           // Redirect back to the place's show view

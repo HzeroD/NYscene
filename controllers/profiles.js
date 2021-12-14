@@ -62,6 +62,22 @@ function show(req, res) {
     })
   }
 
+  function addFollower(req, res) {
+    Profile.findById(req.user.profile)
+    .then(profile => {
+      profile.followers.push(req.params.id)
+      profile.save()
+      .then(() => {
+        console.log(profile)
+        res.json(profile)
+      })
+    })
+    .catch(err => {
+      console.log(err)
+      res.json(err)
+    })
+  }
+
 
   function removeFriend(req, res) {
     // Look up the logged in user's profile

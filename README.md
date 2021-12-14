@@ -1,5 +1,5 @@
-# SEI--10/04--MEN Stack Web Application
-## NYscene
+
+### NYscene
 
 
 ---
@@ -27,6 +27,8 @@ The Begin Adventure button will take the player to the introductory story. Click
 It is simple: Read the story shown and click on which path you would take as the protagonist. An example is shown below:
 
 ![image](/images/NYsceneERD.drawio.png)
+![image](/images/NYscene_list_view.png)
+![image](images/NYscene_places_view.png)
 <br>
 
 
@@ -41,7 +43,7 @@ API: Google Places API
 
 ### Next Steps
 
-To improve the app's presentation.
+The app met and exceeded expectations in terms of functionality given my experience level. With that said, stylistic improvements are much needed.
 
 
 
