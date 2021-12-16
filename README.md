@@ -20,7 +20,6 @@ As a NYC native I've received guests over the years who want to enjoy the city a
 
 ### Game Link and Guide
 
-[From Above](https://fromabove.surge.sh/)
 
 
 The Begin Adventure button will take the player to the introductory story. Clicking Start Game will start the game. 
