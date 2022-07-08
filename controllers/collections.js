@@ -7,7 +7,6 @@ function index(req,res){
         Place.find({addedBy: req.user.profile._id})
         .then(places =>{
             const references = []
-            console.log(places[0].name)
             for(let i = 0; i < places.length; i++){
                 axios.get(`https://maps.googleapis.com/maps/api/place/textsearch/json?query=${places[i].name.toString()}&key=${process.env.API_KEY}`,function(err, response){})
                 .then(response => {

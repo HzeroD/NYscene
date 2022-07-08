@@ -16,6 +16,7 @@ function toActivities(req, res){
     // req.body.borough = borough.toUTCString()
 
     //AXIOS is necessary here if we want to preview the kinds of activities the payload borough has
+    console.log(req.body.borough)
     axios.get(`https://maps.googleapis.com/maps/api/place/textsearch/json?query=${req.body.borough}&key=${process.env.API_KEY}`)
     .then(response => {
        
@@ -33,8 +34,12 @@ function toActivities(req, res){
 }
 
 function list(req,res){
+    
     const name = Object.keys(req.body)[0]
     const place = Object.values(req.body)[0]
+    console.log("LIST REQ.BODY",req.body)
+    console.log("NAMENAMENAMENAMNAMAMEMEM",name)
+    console.log("PLACE",place)
     axios.get(`https://maps.googleapis.com/maps/api/place/textsearch/json?query=${name}&type=${place}&key=${process.env.API_KEY}`)
     .then(response => {
         console.log(response.data.results[0])
